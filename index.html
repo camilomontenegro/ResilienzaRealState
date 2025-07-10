@@ -7,130 +7,415 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-    <!-- Link to external stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
-<body class="antialiased">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <!-- Main content wrapper for background fade effect -->
-    <div id="main-wrapper">
-        <div class="min-h-screen flex flex-col">
-            <!-- Header -->
-            <header class="w-full py-6 px-4 sm:px-8 md:px-12">
-                <div class="container mx-auto flex justify-between items-center">
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body class="antialiased bg-beige">
+
+    <!-- Main content wrapper -->
+    <div id="main-wrapper" class="transition-all duration-300">
+        
+        <!-- Header -->
+        <header class="fixed top-0 w-full z-30 glass-effect">
+            <div class="container mx-auto px-4 sm:px-8 md:px-12 py-4">
+                <div class="flex justify-between items-center">
                     <!-- Logo -->
-                    <div class="font-serif text-2xl font-medium tracking-wider">
-                        <a href="#">Resilienza</a>
+                    <div class="font-serif text-2xl font-medium tracking-wider text-terracotta">
+                        <a href="#" class="hover:text-opacity-80 transition-all duration-300">Resilienza</a>
                     </div>
 
                     <!-- Desktop Navigation -->
-                    <nav class="hidden md:flex items-center space-x-10">
-                        <a href="#" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Home</a>
-                        <a href="#" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Vacationing</a>
-                        <a href="#" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">About</a>
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="#home" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Home</a>
+                        <a href="#properties" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Properties</a>
+                        <a href="#location" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Location</a>
+                        <a href="#about" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">About</a>
                     </nav>
 
                     <!-- Log In Button -->
-                    <a href="#" class="login-trigger hidden md:inline-block bg-terracotta text-white font-sans font-light py-2 px-8 rounded-full hover:bg-terracotta-dark transition-colors duration-300 shadow-sm">
+                    <button class="login-trigger hidden md:inline-block bg-terracotta text-white font-sans font-light py-2 px-6 rounded-full hover:bg-terracotta-dark transition-all duration-300 shadow-lg hover:shadow-xl">
                         Log In
-                    </a>
+                    </button>
                     
                     <!-- Mobile Menu Button -->
-                    <button class="md:hidden" id="mobileMenuButton">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <button class="md:hidden text-terracotta" id="mobileMenuButton">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                     </button>
                 </div>
-                <!-- Mobile Menu (hidden by default) -->
-                <div id="mobileMenu" class="hidden md:hidden mt-4">
+                
+                <!-- Mobile Menu -->
+                <div id="mobileMenu" class="hidden md:hidden mt-4 glass-effect rounded-lg p-4">
                     <nav class="flex flex-col items-center space-y-4">
-                        <a href="#" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Home</a>
-                        <a href="#" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Vacationing</a>
-                        <a href="#" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">About</a>
-                        <a href="#" class="login-trigger mt-2 inline-block bg-terracotta text-white font-sans font-light py-2 px-8 rounded-full hover:bg-terracotta-dark transition-colors duration-300 shadow-sm">
+                        <a href="#home" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Home</a>
+                        <a href="#properties" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Properties</a>
+                        <a href="#location" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">Location</a>
+                        <a href="#about" class="font-serif text-lg tracking-wide hover:text-terracotta transition-colors duration-300">About</a>
+                        <button class="login-trigger mt-2 bg-terracotta text-white font-sans font-light py-2 px-6 rounded-full hover:bg-terracotta-dark transition-all duration-300">
                             Log In
-                        </a>
+                        </button>
                     </nav>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <!-- Main Content -->
-            <main class="flex-grow flex flex-col items-center justify-center text-center px-4">
-                <!-- Headline -->
-                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-medium leading-tight max-w-4xl">
-                    Discover your new home
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 hero-image-1">
+                <div class="absolute inset-0 hero-gradient"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="relative z-10 text-center px-4 max-w-6xl mx-auto">
+                <!-- Main Headline -->
+                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-medium leading-tight mb-8 fade-in">
+                    Discover your
+                    <span class="text-terracotta">new home</span>
                 </h1>
+                
+                <p class="text-xl md:text-2xl font-light mb-12 max-w-3xl mx-auto fade-in" style="animation-delay: 0.2s;">
+                    Experience luxury living in our exclusive Mediterranean-style villas, where modern comfort meets timeless elegance.
+                </p>
 
                 <!-- Booking Bar -->
-                <div class="mt-12 md:mt-16 w-full max-w-4xl bg-white/50 backdrop-blur-sm rounded-xl booking-bar-shadow p-4 md:p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <div class="fade-in w-full max-w-5xl mx-auto glass-effect rounded-2xl p-6 md:p-8 shadow-2xl" style="animation-delay: 0.4s;">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
                         <!-- Check-In -->
-                        <div class="relative col-span-1">
-                            <label for="checkin" class="block text-sm font-light text-left text-gray-600 mb-1">Check-In</label>
-                            <input type="text" id="checkin" placeholder="Select Date" class="booking-input pl-8" onfocus="(this.type='date')" onblur="(this.type='text')">
-                            <div class="absolute inset-y-0 left-0 top-5 flex items-center pl-1 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
+                        <div>
+                            <label for="checkin" class="block text-sm font-medium text-left mb-2">Check-In</label>
+                            <input type="date" id="checkin" class="booking-input">
                         </div>
 
                         <!-- Check-Out -->
-                        <div class="relative col-span-1">
-                            <label for="checkout" class="block text-sm font-light text-left text-gray-600 mb-1">Check-Out</label>
-                            <input type="text" id="checkout" placeholder="Select Date" class="booking-input pl-8" onfocus="(this.type='date')" onblur="(this.type='text')">
-                            <div class="absolute inset-y-0 left-0 top-5 flex items-center pl-1 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
+                        <div>
+                            <label for="checkout" class="block text-sm font-medium text-left mb-2">Check-Out</label>
+                            <input type="date" id="checkout" class="booking-input">
                         </div>
 
-                        <!-- Guests -->
-                        <div class="relative col-span-1">
-                            <label for="guests" class="block text-sm font-light text-left text-gray-600 mb-1">Guests</label>
-                            <input type="text" id="guests" placeholder="Add Guests" class="booking-input pl-8" onfocus="(this.type='number')" onblur="(this.type='text')">
-                             <div class="absolute inset-y-0 left-0 top-5 flex items-center pl-1 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A18.75 18.75 0 0112 22.5c-2.786 0-5.433-.608-7.499-1.688z" /></svg>
+                        <!-- Replace the guests section with this -->
+                        <div>
+                            <label for="guests" class="block text-sm font-medium text-left mb-2">Guests</label>
+                            <div class="guest-counter booking-input">
+                                <button type="button" class="counter-btn decrement" id="guestDecrement">
+                                    <svg width="14" height="14" fill="#BF5A36" viewBox="0 0 16 16">
+                                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                    </svg>
+                                </button>
+                                <div class="guest-display">
+                                    <span id="guestCount">1</span>
+                                    <span class="guest-label">Guest</span>
+                                </div>
+                                <button type="button" class="counter-btn increment" id="guestIncrement">
+                                    <svg width="14" height="14" fill="#BF5A36" viewBox="0 0 16 16">
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                    </svg>
+                                </button>
                             </div>
+                            <!-- Hidden input to store the value -->
+                            <input type="hidden" id="guests" name="guests" value="1">
                         </div>
 
                         <!-- Search Button -->
-                        <div class="col-span-1 md:pt-6">
-                            <button class="w-full bg-terracotta text-white font-sans font-normal py-3 px-6 rounded-lg hover:bg-terracotta-dark transition-colors duration-300 shadow-md flex items-center justify-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                Search
+                        <div>
+                            <button class="w-full bg-terracotta text-white font-sans font-medium py-3 px-6 rounded-lg hover:bg-terracotta-dark transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                Search Villas
                             </button>
                         </div>
                     </div>
                 </div>
-            </main>
-            
-            <!-- Footer could go here -->
-            <footer class="w-full text-center p-4 text-xs text-gray-500">
-                <p>&copy; 2025 Resilienza Real Estate. All rights reserved.</p>
-            </footer>
-        </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <svg class="w-6 h-6 text-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Properties Showcase Section -->
+        <section id="properties" class="section-padding bg-white">
+            <div class="container mx-auto px-4 sm:px-8 md:px-12">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-4xl md:text-6xl font-medium mb-6 fade-in">Featured Properties</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in" style="animation-delay: 0.2s;">
+                        Immerse yourself in luxury with our carefully curated collection of Mediterranean-style villas, each offering unique charm and modern amenities.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                    <!-- Villa Serenity -->
+                    <div class="slide-in-left">
+                        <div class="hero-image-1 rounded-2xl overflow-hidden shadow-2xl">
+                            <div class="h-96 bg-gradient-to-br from-transparent to-black/30 flex items-end p-8">
+                                <div class="text-white">
+                                    <h3 class="font-serif text-3xl font-medium mb-2">Villa Serenity</h3>
+                                    <p class="text-lg opacity-90">Private pool • Ocean views • Modern terrace</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-in-right">
+                        <h3 class="font-serif text-3xl md:text-4xl font-medium mb-6 text-terracotta">Mediterranean Elegance</h3>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            Experience the perfect blend of contemporary design and Mediterranean charm. This stunning villa features an open-plan living space, private infinity pool, and expansive terraces with breathtaking sea views.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-terracotta mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                4 Bedrooms • 3 Bathrooms
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-terracotta mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Private infinity pool & spa
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-terracotta mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Full concierge service
+                            </li>
+                        </ul>
+                        <button class="bg-terracotta text-white px-8 py-3 rounded-lg hover:bg-terracotta-dark transition-all duration-300 shadow-lg hover:shadow-xl">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Content First -->
+                    <div class="slide-in-left lg:order-2">
+                        <h3 class="font-serif text-3xl md:text-4xl font-medium mb-6 text-terracotta">Terrace Paradise</h3>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            Discover a world of outdoor luxury with our signature terrace villas. Each unit features multiple outdoor living spaces, lush gardens, and premium outdoor furniture perfect for entertaining or peaceful relaxation.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-terracotta mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Expansive outdoor terraces
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-terracotta mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Premium outdoor furniture
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-terracotta mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Tropical landscaping
+                            </li>
+                        </ul>
+                        <button class="bg-terracotta text-white px-8 py-3 rounded-lg hover:bg-terracotta-dark transition-all duration-300 shadow-lg hover:shadow-xl">
+                            Explore Villas
+                        </button>
+                    </div>
+                    <!-- Image Second -->
+                    <div class="slide-in-right lg:order-1">
+                        <div class="hero-image-2 rounded-2xl overflow-hidden shadow-2xl">
+                            <div class="h-96 bg-gradient-to-br from-transparent to-black/30 flex items-end p-8">
+                                <div class="text-white">
+                                    <h3 class="font-serif text-3xl font-medium mb-2">Villa Terrazza</h3>
+                                    <p class="text-lg opacity-90">Outdoor living • Garden views • Modern comfort</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location & Development Section -->
+        <section id="location" class="section-padding bg-beige">
+            <div class="container mx-auto px-4 sm:px-8 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="slide-in-left">
+                        <h2 class="font-serif text-4xl md:text-6xl font-medium mb-6 text-terracotta">Prime Location</h2>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Strategically positioned in an exclusive coastal development, our villas offer unparalleled access to pristine beaches, world-class amenities, and breathtaking natural beauty.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-terracotta text-white rounded-full p-2 mr-4 mt-1">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-serif text-xl font-medium mb-2">Coastal Paradise</h4>
+                                    <p class="text-gray-600">Just 200 meters from crystal-clear Mediterranean waters</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-terracotta text-white rounded-full p-2 mr-4 mt-1">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-serif text-xl font-medium mb-2">Modern Infrastructure</h4>
+                                    <p class="text-gray-600">State-of-the-art facilities and sustainable development</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-terracotta text-white rounded-full p-2 mr-4 mt-1">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-serif text-xl font-medium mb-2">Exclusive Access</h4>
+                                    <p class="text-gray-600">Private community with 24/7 security and concierge</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-in-right">
+                        <div class="hero-image-3 rounded-2xl shadow-2xl relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-terracotta/20 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <div class="glass-effect rounded-lg p-4">
+                                    <h4 class="font-serif text-xl font-medium text-white mb-2">Development Overview</h4>
+                                    <p class="text-white/90 text-sm">Aerial view of our exclusive coastal resort community</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-4 sm:px-8 md:px-12">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-4xl md:text-6xl font-medium mb-6 fade-in">The Resilienza Experience</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in" style="animation-delay: 0.2s;">
+                        More than just accommodation—discover a lifestyle of luxury, comfort, and unforgettable memories.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center fade-in" style="animation-delay: 0.1s;">
+                        <div class="floating mb-6">
+                            <div class="bg-terracotta text-white rounded-full p-6 mx-auto w-20 h-20 flex items-center justify-center">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-medium mb-4">Luxury Amenities</h3>
+                        <p class="text-gray-600">Private pools, spa services, gourmet kitchens, and premium furnishings in every villa.</p>
+                    </div>
+
+                    <div class="text-center fade-in" style="animation-delay: 0.3s;">
+                        <div class="floating mb-6" style="animation-delay: 1s;">
+                            <div class="bg-terracotta text-white rounded-full p-6 mx-auto w-20 h-20 flex items-center justify-center">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-medium mb-4">Perfect Location</h3>
+                        <p class="text-gray-600">Prime beachfront position with easy access to local attractions and cultural sites.</p>
+                    </div>
+
+                    <div class="text-center fade-in" style="animation-delay: 0.5s;">
+                        <div class="floating mb-6" style="animation-delay: 2s;">
+                            <div class="bg-terracotta text-white rounded-full p-6 mx-auto w-20 h-20 flex items-center justify-center">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-medium mb-4">Personalized Service</h3>
+                        <p class="text-gray-600">24/7 concierge service, private chefs, and tailored experiences for every guest.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-terracotta text-white section-padding">
+            <div class="container mx-auto px-4 sm:px-8 md:px-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <h3 class="font-serif text-2xl font-medium mb-4">Resilienza</h3>
+                        <p class="text-white/80 leading-relaxed">Experience the pinnacle of luxury vacation living in our exclusive Mediterranean villas.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-medium mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#properties" class="text-white/80 hover:text-white transition-colors">Properties</a></li>
+                            <li><a href="#location" class="text-white/80 hover:text-white transition-colors">Location</a></li>
+                            <li><a href="#about" class="text-white/80 hover:text-white transition-colors">About</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-medium mb-4">Services</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-white/80 hover:text-white transition-colors">Villa Rentals</a></li>
+                            <li><a href="#" class="text-white/80 hover:text-white transition-colors">Concierge</a></li>
+                            <li><a href="#" class="text-white/80 hover:text-white transition-colors">Private Chef</a></li>
+                            <li><a href="#" class="text-white/80 hover:text-white transition-colors">Spa Services</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-medium mb-4">Contact</h4>
+                        <div class="space-y-2 text-white/80">
+                            <p>+1 (555) 123-4567</p>
+                            <p>hello@resilienza.com</p>
+                            <p>Mediterranean Coast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-white/20 pt-8 text-center text-white/60">
+                    <p>&copy; 2025 Resilienza Real Estate. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Login Modal -->
-    <div id="loginOverlay" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm z-40 hidden"></div>
+    <div id="loginOverlay" class="fixed inset-0 modal-backdrop z-40 hidden"></div>
 
-    <div id="loginModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-beige p-8 md:p-12 rounded-xl shadow-2xl w-11/12 max-w-md z-50 hidden scale-95 opacity-0">
+    <div id="loginModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-8 md:p-12 rounded-2xl shadow-2xl w-11/12 max-w-md z-50 hidden scale-95 opacity-0">
         <!-- Close Button -->
         <button id="closeModalButton" class="absolute top-4 right-4 text-gray-500 hover:text-terracotta transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
         </button>
         
-        <h2 class="font-serif text-3xl text-center mb-2">Welcome Back</h2>
-        <p class="text-center text-gray-600 mb-8">Log in to your Resilienza account.</p>
+        <h2 class="font-serif text-3xl text-center mb-2 text-terracotta">Welcome Back</h2>
+        <p class="text-center text-gray-600 mb-8">Access your Resilienza account</p>
         
         <form>
             <div class="mb-4">
-                <label for="email" class="block font-sans text-sm font-light text-gray-600 mb-1">Email Address</label>
-                <input type="email" id="email" class="w-full p-3 bg-white/80 border border-gray-300 rounded-lg focus:ring-1 focus:ring-terracotta focus:border-terracotta transition">
+                <label for="email" class="block font-sans text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-terracotta focus:border-terracotta transition-all">
             </div>
             <div class="mb-6">
-                <label for="password" class="block font-sans text-sm font-light text-gray-600 mb-1">Password</label>
-                <input type="password" id="password" class="w-full p-3 bg-white/80 border border-gray-300 rounded-lg focus:ring-1 focus:ring-terracotta focus:border-terracotta transition">
+                <label for="password" class="block font-sans text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input type="password" id="password" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-terracotta focus:border-terracotta transition-all">
             </div>
-            <button type="submit" class="w-full bg-terracotta text-white font-sans py-3 rounded-lg hover:bg-terracotta-dark transition-colors duration-300 shadow-md">
+            <button type="submit" class="w-full bg-terracotta text-white font-sans font-medium py-3 rounded-lg hover:bg-terracotta-dark transition-all duration-300 shadow-lg hover:shadow-xl">
                 Log In
             </button>
         </form>
@@ -141,9 +426,14 @@
             <div class="flex-grow border-t border-gray-300"></div>
         </div>
         
-        <button class="w-full flex items-center justify-center py-3 border border-gray-300 rounded-lg bg-white/80 hover:bg-white transition-colors duration-300">
-            <img src="https://www.google.com/favicon.ico" alt="Google icon" class="w-5 h-5 mr-3" onerror="this.style.display='none'">
-            Log In with Google
+        <button class="w-full flex items-center justify-center py-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-all duration-300">
+            <svg class="w-5 h-5 mr-3" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            Continue with Google
         </button>
         
         <p class="text-center text-sm text-gray-600 mt-8">
@@ -151,7 +441,6 @@
         </p>
     </div>
 
-    <!-- Link to external JavaScript file -->
     <script src="script.js"></script>
 
 </body>

@@ -7,7 +7,6 @@
 }
 
 body {
-    background-color: var(--beige);
     font-family: 'Lato', sans-serif;
     color: var(--dark-text);
 }
@@ -21,39 +20,513 @@ body {
 }
 
 /* Custom colors for Tailwind */
-.bg-beige { background-color: var(--beige); }
-.bg-blush { background-color: var(--blush); }
-.bg-terracotta { background-color: var(--terracotta); }
-.text-terracotta { color: var(--terracotta); }
-.border-terracotta { border-color: var(--terracotta); }
-.hover\:bg-terracotta-dark:hover { background-color: #a94f2f; }
+.bg-beige { 
+    background-color: var(--beige); 
+}
 
-/* Custom styling for the booking bar inputs */
+.bg-blush { 
+    background-color: var(--blush); 
+}
+
+.bg-terracotta { 
+    background-color: var(--terracotta); 
+}
+
+.text-terracotta { 
+    color: var(--terracotta); 
+}
+
+.border-terracotta { 
+    border-color: var(--terracotta); 
+}
+
+.hover\:bg-terracotta-dark:hover { 
+    background-color: #a94f2f; 
+}
+
+/* Background gradients and effects */
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(245, 239, 230, 0.95) 0%, rgba(232, 210, 208, 0.95) 100%);
+}
+
+.image-overlay {
+    background: linear-gradient(45deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+}
+
+/* Parallax container */
+.parallax-container {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.parallax-back {
+    transform: translateZ(-1px) scale(2);
+}
+
+.parallax-base {
+    transform: translateZ(0);
+}
+
+/* Form inputs */
 .booking-input {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #d1c7bc; /* Lighter beige-gray border */
-    padding: 0.5rem 0.25rem;
-    transition: border-color 0.3s ease;
-    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(191, 90, 54, 0.2);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
     font-family: 'Lato', sans-serif;
     width: 100%;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .booking-input:focus {
     outline: none;
-    border-bottom-color: var(--terracotta);
+    border-color: var(--terracotta);
+    box-shadow: 0 0 0 3px rgba(191, 90, 54, 0.1);
 }
 
-.booking-bar-shadow {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+/* Guest Counter Styling */
+.guest-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    height: 100%;
 }
 
-/* Modal transitions */
+.counter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba(191, 90, 54, 0.1);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.counter-btn:hover {
+    background: rgba(191, 90, 54, 0.2);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(191, 90, 54, 0.2);
+}
+
+.counter-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.counter-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(128, 128, 128, 0.1);
+}
+
+.counter-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.counter-btn:disabled svg {
+    fill: #888;
+}
+
+.guest-display {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+}
+
+#guestCount {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--terracotta);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+}
+
+.guest-label {
+    font-size: 0.875rem;
+    color: var(--dark-text);
+    font-weight: 400;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+/* Pulse animation for count changes */
+@keyframes countPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.count-changed {
+    animation: countPulse 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.counter-btn:focus {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .guest-counter {
+        gap: 0.75rem;
+        padding: 0.5rem;
+    }
+    
+    .counter-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+    
+    #guestCount {
+        font-size: 1.25rem;
+    }
+}
+
+/* Flatpickr Custom Styling */
+.flatpickr-calendar {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    padding: 1rem !important;
+}
+
+.flatpickr-calendar.open {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.flatpickr-months {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(191, 90, 54, 0.2) !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.flatpickr-month {
+    background: transparent !important;
+    color: var(--terracotta) !important;
+}
+
+.flatpickr-current-month {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 500 !important;
+    color: var(--terracotta) !important;
+}
+
+.flatpickr-weekdays {
+    background: transparent !important;
+    color: var(--dark-text) !important;
+    font-weight: 500 !important;
+}
+
+.flatpickr-weekday {
+    background: transparent !important;
+    color: var(--dark-text) !important;
+    font-size: 0.875rem !important;
+}
+
+.flatpickr-day {
+    background: transparent !important;
+    border: none !important;
+    color: var(--dark-text) !important;
+    border-radius: 0.5rem !important;
+    font-weight: 400 !important;
+    transition: all 0.2s ease !important;
+}
+
+.flatpickr-day:hover {
+    background: rgba(191, 90, 54, 0.1) !important;
+    color: var(--terracotta) !important;
+    transform: scale(1.05) !important;
+}
+
+.flatpickr-day.selected {
+    background: var(--terracotta) !important;
+    color: white !important;
+    font-weight: 500 !important;
+    box-shadow: 0 4px 12px rgba(191, 90, 54, 0.3) !important;
+}
+
+.flatpickr-day.inRange {
+    background: rgba(191, 90, 54, 0.2) !important;
+    color: var(--terracotta) !important;
+}
+
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: var(--terracotta) !important;
+    color: white !important;
+}
+
+.flatpickr-day.today {
+    border: 2px solid var(--terracotta) !important;
+    color: var(--terracotta) !important;
+    font-weight: 500 !important;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: var(--terracotta) !important;
+    transition: all 0.2s ease !important;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    color: var(--dark-text) !important;
+    transform: scale(1.2) !important;
+}
+
+/* Remove default date input styling when using Flatpickr */
+.booking-input.flatpickr-input {
+    cursor: pointer;
+}
+
+.booking-input.flatpickr-input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+/* Property cards */
+.property-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.property-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Animation classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Glass effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fix search button height to match inputs */
+button.bg-terracotta,
+.bg-terracotta.shadow-lg,
+button[class*="bg-terracotta"] {
+    height: 3.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Hero background images */
+.hero-image-1 {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23F5EFE6" width="800" height="600"/><rect fill="%23E8D2D0" x="0" y="400" width="800" height="200"/><rect fill="%23BF5A36" x="100" y="100" width="600" height="300" rx="20"/><text x="400" y="270" text-anchor="middle" fill="white" font-size="24" font-family="serif">Luxury Villa - Pool View</text></svg>') center/cover;
+    min-height: 60vh;
+}
+
+.hero-image-2 {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23F5EFE6" width="800" height="600"/><rect fill="%23E8D2D0" x="0" y="0" width="800" height="200"/><rect fill="%23BF5A36" x="50" y="150" width="700" height="350" rx="20"/><text x="400" y="340" text-anchor="middle" fill="white" font-size="24" font-family="serif">Modern Terrace Living</text></svg>') center/cover;
+    min-height: 60vh;
+}
+
+.hero-image-3 {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23F5EFE6" width="800" height="600"/><rect fill="%23E8D2D0" x="100" y="50" width="600" height="400" rx="20"/><rect fill="%23BF5A36" x="200" y="150" width="400" height="200" rx="10"/><text x="400" y="270" text-anchor="middle" fill="white" font-size="24" font-family="serif">Aerial Development View</text></svg>') center/cover;
+    min-height: 50vh;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-10px) rotate(1deg); 
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+.modal-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);
+}
+
 #loginModal {
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#main-wrapper {
-    transition: filter 0.3s ease, opacity 0.3s ease;
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateX(-50%) translateY(0); 
+    }
+    40% { 
+        transform: translateX(-50%) translateY(-10px); 
+    }
+    60% { 
+        transform: translateX(-50%) translateY(-5px); 
+    }
+}
+
+.section-padding {
+    padding: 5rem 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .section-padding {
+        padding: 3rem 0;
+    }
+    
+    .hero-image-1,
+    .hero-image-2,
+    .hero-image-3 {
+        min-height: 40vh;
+    }
+    
+    .scroll-indicator {
+        bottom: 20px;
+    }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 640px) {
+    .glass-effect {
+        backdrop-filter: blur(10px);
+    }
+    
+    .fade-in,
+    .slide-in-left,
+    .slide-in-right {
+        transform: translateY(20px);
+    }
+    
+    .slide-in-left {
+        transform: translateX(-30px);
+    }
+    
+    .slide-in-right {
+        transform: translateX(30px);
+    }
+}
+
+/* Focus states for accessibility */
+.booking-input:focus,
+button:focus,
+a:focus {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+}
+
+/* Smooth transitions for interactive elements */
+button,
+a {
+    transition: all 0.3s ease;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--beige);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--terracotta);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a94f2f;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateX(-50%) translateY(0); }
+    to { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
