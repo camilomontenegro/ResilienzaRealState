@@ -46,7 +46,7 @@ body {
 
 /* Background gradients and effects */
 .hero-gradient {
-    background: linear-gradient(135deg, rgba(245, 239, 230, 0.95) 0%, rgba(232, 210, 208, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(245, 239, 230, 0.95) 0%, rgba(232, 210, 208, 0.7) 100%);
 }
 
 .image-overlay {
@@ -390,17 +390,17 @@ button[class*="bg-terracotta"] {
 
 /* Hero background images */
 .hero-image-1 {
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23F5EFE6" width="800" height="600"/><rect fill="%23E8D2D0" x="0" y="400" width="800" height="200"/><rect fill="%23BF5A36" x="100" y="100" width="600" height="300" rx="20"/><text x="400" y="270" text-anchor="middle" fill="white" font-size="24" font-family="serif">Luxury Villa - Pool View</text></svg>') center/cover;
+    background: url(images/Top_house.png) center/cover;
     min-height: 60vh;
 }
 
 .hero-image-2 {
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23F5EFE6" width="800" height="600"/><rect fill="%23E8D2D0" x="0" y="0" width="800" height="200"/><rect fill="%23BF5A36" x="50" y="150" width="700" height="350" rx="20"/><text x="400" y="340" text-anchor="middle" fill="white" font-size="24" font-family="serif">Modern Terrace Living</text></svg>') center/cover;
+    background: url(images/Front_house_floral.png) center/cover;
     min-height: 60vh;
 }
 
 .hero-image-3 {
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%23F5EFE6" width="800" height="600"/><rect fill="%23E8D2D0" x="100" y="50" width="600" height="400" rx="20"/><rect fill="%23BF5A36" x="200" y="150" width="400" height="200" rx="10"/><text x="400" y="270" text-anchor="middle" fill="white" font-size="24" font-family="serif">Aerial Development View</text></svg>') center/cover;
+    background: url(images/Sattelite_image.png) center/cover;
     min-height: 50vh;
 }
 
