@@ -473,7 +473,7 @@ button[class*="bg-terracotta"] {
     /* Ensure all booking inputs have the same width on mobile */
     .booking-input {
         width: 100% !important;
-        min-width: 100% !important;
+        max-width: 100% !important;
         box-sizing: border-box !important;
     }
     
@@ -502,9 +502,7 @@ button[class*="bg-terracotta"] {
     .guest-counter {
         width: 100% !important;
         max-width: 100% !important;
-        overflow: hidden !important;
-        padding-left: 0.75rem !important;
-        padding-right: 0.75rem !important;
+        box-sizing: border-box !important;
     }
 }
 
