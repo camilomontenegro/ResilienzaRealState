@@ -475,6 +475,7 @@ button[class*="bg-terracotta"] {
         width: 100% !important;
         min-width: 100% !important;
         box-sizing: border-box !important;
+        padding-left: 0.5rem;
     }
     /* Fix booking form grid spacing on mobile */
     .fade-in .grid {
