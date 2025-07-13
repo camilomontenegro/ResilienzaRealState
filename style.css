@@ -512,6 +512,7 @@ button[class*="bg-terracotta"] {
     /* Safari-specific date input fixes */
     @supports (-webkit-appearance: none) {
         input[type="date"].booking-input {
+            appearance: none !important;
             -webkit-appearance: none !important;
             width: 100% !important;
             min-width: 0 !important;
