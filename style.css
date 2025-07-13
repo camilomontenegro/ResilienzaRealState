@@ -471,7 +471,7 @@ button[class*="bg-terracotta"] {
     }
 
     /* Ensure all booking inputs have the same width on mobile */
-    /* .booking-input {
+    .booking-input {
         width: 100% !important;
         min-width: 100% !important;
         box-sizing: border-box !important;
@@ -484,7 +484,7 @@ button[class*="bg-terracotta"] {
     input[type="date"].booking-input {
         width: 100% !important;
         padding: 0.75rem 1rem !important;
-    } */
+    }
      .grid.md\\:grid-cols-4 {
         display: flex !important;
         flex-direction: column !important;
