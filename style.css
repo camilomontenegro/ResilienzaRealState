@@ -456,7 +456,6 @@ button[class*="bg-terracotta"] {
     .section-padding {
         padding: 3rem 0;
     }
-    
     .hero-image-1,
     .hero-image-2,
     .hero-image-3 {
@@ -465,6 +464,27 @@ button[class*="bg-terracotta"] {
     
     .scroll-indicator {
         bottom: 20px;
+    }
+    /* Fix header overlap on mobile */
+    #home {
+        padding-top: 6rem; /* Add space for fixed header */
+    }
+
+    /* Ensure all booking inputs have the same width on mobile */
+    .booking-input {
+        width: 100% !important;
+        min-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    /* Fix booking form grid spacing on mobile */
+    .fade-in .grid {
+        gap: 1rem !important;
+    }
+    
+    /* Ensure date inputs don't have different styling */
+    input[type="date"].booking-input {
+        width: 100% !important;
+        padding: 0.75rem 1rem !important;
     }
 }
 
