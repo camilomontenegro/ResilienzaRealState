@@ -475,7 +475,6 @@ button[class*="bg-terracotta"] {
         width: 100% !important;
         min-width: 100% !important;
         box-sizing: border-box !important;
-        padding-left: 0.5rem;
     }
     /* Fix booking form grid spacing on mobile */
     .fade-in .grid {
@@ -486,6 +485,37 @@ button[class*="bg-terracotta"] {
     input[type="date"].booking-input {
         width: 100% !important;
         padding: 0.75rem 1rem !important;
+    }
+    .booking-input[type="date"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0.75rem 0.5rem !important; /* Reduce horizontal padding */
+    }
+    
+    /* Ensure booking form uses full width properly */
+    .fade-in .grid.grid-cols-1 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    
+    /* Force all booking elements to same width */
+    .fade-in .grid > div {
+        width: 100% !important;
+        flex: none !important;
+    }
+    
+    /* Fix any date input specific styling */
+    input[type="date"]::-webkit-datetime-edit {
+        width: 100% !important;
+    }
+    
+    /* Ensure buttons don't stretch beyond container */
+    button.bg-terracotta {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
 
