@@ -483,7 +483,11 @@ button[class*="bg-terracotta"] {
     
     input[type="date"].booking-input {
         width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
         padding: 0.75rem 1rem !important;
+        box-sizing: border-box !important;
+        flex: 1 1 auto !important;
     }
      .grid.md\\:grid-cols-4 {
         display: flex !important;
@@ -503,6 +507,15 @@ button[class*="bg-terracotta"] {
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
+    }
+    
+    /* Safari-specific date input fixes */
+    @supports (-webkit-appearance: none) {
+        input[type="date"].booking-input {
+            -webkit-appearance: none !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
     }
 }
 
