@@ -234,6 +234,19 @@ function initBookingForm() {
     const guestsSelect = document.getElementById('guests');
     const searchButton = document.querySelector('.booking-input ~ div button') || document.querySelector('button[class*="bg-terracotta"]');
     
+    // Set dynamic placeholder dates
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const dayAfterTomorrow = new Date();
+    dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
+    
+    if (checkinInput) {
+        checkinInput.placeholder = tomorrow.toISOString().split('T')[0];
+    }
+    if (checkoutInput) {
+        checkoutInput.placeholder = dayAfterTomorrow.toISOString().split('T')[0];
+    }
+    
     let checkinPicker, checkoutPicker;
     
     // Initialize Flatpickr for check-in
